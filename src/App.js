@@ -12,8 +12,23 @@ import {
   Redirect
 } from 'react-router-dom';
 
-class App extends React.Component {
 
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user:{}
+    };
+   
+  }
+
+
+  handleUser = (upd) => {
+  this.setState({
+    user:upd
+  })
+}
   render() {
     console.log('app', this.props);
     console.log(this.props.auth0);
@@ -21,25 +36,25 @@ class App extends React.Component {
       <>
         <Router>
           <Header
-            auth={this.props.auth0.authenticated}
+            auth={this.props.auth0.isAuthenticated}
           />
           <Switch>
 
             <Route exact path="/">
               {this.props.auth0.isAuthenticated ?
-                <CardTable /> : <Login />
-              }
-            </Route>
-            <Route exact path="/login">
-              {this.props.auth0.isAuthenticated ?
-                <Redirect to='/profile' /> : <Login />
+                <CardTable useHandle={this.handleUser} userObj={this.state.user} /> : <Login />
               }
             </Route>
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
-                <Profile /> : <Redirect to='/login' />
+                <Profile /> : <Redirect to='/' />
               }
             </Route>
+            {/* <Route exact path="/about">
+         
+                <AboutUs /> 
+        
+            </Route> */}
 
           </Switch>
           <Footer />
