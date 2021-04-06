@@ -2,7 +2,7 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 import CardReveal from './CardReveal';
-
+const axios = require('axios');
 class CardTable extends React.Component {
   constructor(props) {
     super(props);
@@ -18,11 +18,11 @@ class CardTable extends React.Component {
     };
     // const user = this.props.auth0;
   }
-const axios = require('axios');
+
   anteUp = async() => {
     const url= process.env.API
-    axios.get(`${url}/draw`).
-    then((hand)=> {
+    axios.get(`${url}/draw`)
+    .then((hand)=> {
       this.props.handleDraw(hand)
     console.log("in ante", hand)})
     .catch(err => {console.error(err)})
