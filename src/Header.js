@@ -19,7 +19,7 @@ class Header extends React.Component {
           <Form inline>
             <LoginButton />
             <LogoutButton auth={this.props.auth0.authenticated} />
-            <LoggedInPic />
+            <LoggedInPic><Link to="/Profile" /></LoggedInPic>
           </Form>
         </Container>
       </Navbar>

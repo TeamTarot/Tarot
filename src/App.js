@@ -30,14 +30,14 @@ class App extends React.Component {
                 <CardTable /> : <Login />
               }
             </Route>
-            <Route exact path="/login">
+            <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
                 <Redirect to='/profile' /> : <Login />
               }
             </Route>
-            <Route exact path="/profile">
+            <Route exact path="/About Us">
               {this.props.auth0.isAuthenticated ?
-                <Profile /> : <Redirect to='/login' />
+                <AboutUs /> : <Redirect to='/login' />
               }
             </Route>
 
