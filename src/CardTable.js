@@ -1,6 +1,7 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
+import CardReveal from './CardReveal';
 
 class CardTable extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class CardTable extends React.Component {
     this.state = {
       tarotCards: [],
       cardName: '',
-      cardDescription: '',
+      journal: '',
       reversed: false,
       showJournal: false,
       draw: false,
@@ -17,7 +18,7 @@ class CardTable extends React.Component {
     };
     // const user = this.props.auth0;
   }
-
+const axios = require('axios');
   anteUp = async() => {
     const url= process.env.API
     axios.get(`${url}/draw`).
@@ -31,14 +32,11 @@ class CardTable extends React.Component {
     return(
       <>{this.state.draw=== false 
         ?<Button className="drawButton" onClick={this.state.draw} />
-      : <Container> 
-        <Card>
-          <Card.Title>{this.state.cardName}</Card.Title>
-          <Card.Text>{this.state.cardDescription}</Card.Text>
-          <Button variant="edit">S</Button>
-          <Button variant="delete">D</Button>
-        </Card>
-      </Container>
+      : <>
+        <CardReveal future={this.state.draw} />
+        <textarea className="journal-field" onChange={(e)=>{this.setState({journal: e.target.value})}} />
+        <Button type='submit' >Save entry to journal?</Button>
+      </>
       }</>
     );
   }

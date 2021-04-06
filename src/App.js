@@ -2,9 +2,10 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import Header from './Header';
 import Login from './Login';
-import Profile from './Profile';
+// import Profile from './Profile';
 import Footer from './Footer';
 import CardTable from './CardTable';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,11 +36,11 @@ class App extends React.Component {
                 <Redirect to='/profile' /> : <Login />
               }
             </Route>
-            <Route exact path="/About Us">
+            {/* <Route exact path="/About Us">
               {this.props.auth0.isAuthenticated ?
                 <AboutUs /> : <Redirect to='/login' />
               }
-            </Route>
+            </Route> */}
 
           </Switch>
           <Footer />

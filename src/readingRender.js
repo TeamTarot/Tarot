@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card, Button } from 'react-bootstrap';
 
 
 
-
+//Profile object with accordian stuffs
 
 class ReadingRender extends React.Component {
     constructor(props) {
@@ -18,15 +18,15 @@ class ReadingRender extends React.Component {
 
 renderMe = (herstory) => {
             herstory.reduce((acc, curr)=>{
-                let shaper = () => {
-                    curr => (
+               
+              return  () => (
                         <Card>
                             <Accordion.Toggle as={Card.Header} eventKey="0">
                                 <div className="r-h-c">
                                     <div className="card-box">
-                                        <img src={herstory.cardSet[0]} alt={herstory.cardSet[0].name} key={herstory._id} />
-                                        <img src={herstory.cardSet[1]} alt={herstory.cardSet[1].name} key={herstory._id+1} />
-                                        <img src={herstory.cardSet[2]} alt={herstory.cardSet[2].name} key={herstory._id+2} />
+                                        <img src={herstory.cardSet[0]} alt={herstory.cardSet[0].name} key={`${herstory.cardSet[0].name} - reh`} />
+                                        <img src={herstory.cardSet[1]} alt={herstory.cardSet[1].name} key={`${herstory.cardSet[1].name} - reh`} />
+                                        <img src={herstory.cardSet[2]} alt={herstory.cardSet[2].name} key={`${herstory.cardSet[2].name} - reh`} />
                                     </div>
                                     <div className="teaser">{herstory.cardSet.description.slice(0,50)}</div>
                                 </div>
@@ -44,9 +44,8 @@ renderMe = (herstory) => {
                             
                         </Card>
                     )
-                }
-                acc.push()
-            }, [])
+             }
+            , [])
         }
 
 
@@ -58,3 +57,5 @@ renderMe = (herstory) => {
             )
         }
     }
+
+    export default ReadingRender;
