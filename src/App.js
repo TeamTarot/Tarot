@@ -47,7 +47,7 @@ class App extends React.Component {
             </Route>
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
-                <Profile /> : <Redirect to='/' />
+                <Profile userObj={this.state.user} /> : <Redirect to='/' />
               }
             </Route>
             {/* <Route exact path="/about">
