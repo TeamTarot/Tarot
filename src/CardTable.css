@@ -1,6 +1,11 @@
 
 
 
+#root{
+    display:grid;
+    justify-content: center;
+}
+
 .reflections{
 
     height: 400px;
@@ -20,7 +25,6 @@
     width: 900px;
     border-radius: 3px;
     background-color: darkslategray;
-    margin:none!;
 }
 
 .draw-button{

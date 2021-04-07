@@ -24,6 +24,8 @@ class CardTable extends React.Component {
     }
   }
 
+ 
+
 
 
   handleDraw = (e) => {
@@ -48,7 +50,8 @@ class CardTable extends React.Component {
     { this.state.showDeck
       ?<>
        <CardDeck >
-          {this.state.draw.map((card) =>{return <Cardd use={card} />})}
+          {this.state.draw.map((card) =>{
+      return <Cardd use={card} id={card._id}/>})}
        </CardDeck>
        <div className="reflections">
        <textarea placeholder="Journal your thoughts and reflections" style={{height:"150px"}} />
