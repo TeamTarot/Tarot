@@ -1,38 +1,38 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-
-
+import Cardd from './Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CardDeck from 'react-bootstrap/CardDeck';
+import './CardTable.css';
 class CardTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: this.props.userObj,
-      draw:[]
-     
-      
+      draw:[],
+      showDeck: false,
     };
-    // const user = this.props.auth0;
   }
-
-
-
-  componentDidMount(){
+  componentDidMount() {
    
     try{
-      const user = axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}});
-      this.props.useHandle(user)
-      
-    }catch(err){
-        console.log(err)
+      axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}})
+      .then(result => {this.props.useHandle(result)})
+    } catch(err) {
+      console.log(err)
     }
   }
+
+
 
   handleDraw = (e) => {
     try{
       e.preventDefault();
-      const hand = axios.get("http://localhost:3001/draw", {});
-      this.setState({draw: hand})
+      const hand = axios.get("http://localhost:3001/draw", {})
+      this.setState({draw: [hand],
+                      showDeck: true})
+    
       
     }catch(err){
         console.log(err)
@@ -41,37 +41,25 @@ class CardTable extends React.Component {
   }
 
   render() {
-    console.log("CardTable User?: ", this.state.user)
+    console.log("staaaaate: ", this.state)
+    console.log("render draw at table:", this.state.draw)
     return(
       <>
-{       this.state.draw.length > 0
+    { this.state.showDeck
       ?<>
-      <div className='card-box'>
-
-          <div className="card-1">
-            <h1>{this.state.draw[0].name}</h1>
-          </div>
-
-          <div className="card-2">
-            <h1>{this.state.draw[1].name}</h1>
-          </div>
-
-          <div className="card-3">
-            <h1>{this.state.draw[2].name}</h1>
-          </div>
-
-      </div>
-      <textarea placeholder="Journal your thoughts" style={{height:"150px"}}></textarea>
-
-      <button>Click to save</button>
-      
-      </>
-      :<button onClick={(e)=>{this.handleDraw()}}>Click me for fortune</button>
-}
+       <CardDeck >
+          {this.state.draw.map((card) =>{return <Cardd use={card} />})}
+       </CardDeck>
+       <div className="reflections">
+       <textarea placeholder="Journal your thoughts and reflections" style={{height:"150px"}} />
+       <button>Click to save</button>
+       </div>
+       </>
+      :<div className="draw-button"><button onClick={(e)=>{this.handleDraw(e)}}>Click me for fortune</button></div>
+    }
       </>
     );
   }
-
 }
 
 export default withAuth0(CardTable);

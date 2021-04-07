@@ -1,0 +1,13 @@
+
+
+
+#root{
+    display: grid;
+    justify-content:center;
+}
+
+
+.login-card{
+    display: grid;
+    justify-self:center;
+}

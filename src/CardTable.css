@@ -1,0 +1,31 @@
+
+
+
+.reflections{
+
+    height: 400px;
+    width: 500px;
+    border-radius: 3px;
+    border-color: black;
+    background-color: rgb(73, 161, 177);
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-deck{
+    display: grid;
+    justify-content: center;
+    height: 400px;
+    width: 900px;
+    border-radius: 3px;
+    background-color: darkslategray;
+    margin:none!;
+}
+
+.draw-button{
+    justify-self: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+

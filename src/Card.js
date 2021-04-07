@@ -1,55 +1,57 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Tooltip } from 'react-bootstrap';
+import './Card.css';
+class Cardd extends React.Component {
 
 
-class Card extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        user: this.props.userObj,
-       }
-    }
-
-
+     readMore = (props) => {
+        return (<Tooltip id="read-more" {...props}>
+            {props.desc}
+        </Tooltip>
+)
+}
 
     futureRender = (card) =>{
+
         return (
-    <Card className="card-1 tarot-card">
+            <OverlayTrigger
+    placement="right"
+    delay={{ show: 250, hide: 400 }}
+    overlay={this.readMore(card)}
+  >
+    <Card className="tarot-card">
       <Card.Img variant="top" src="holder.js/100px180" />
       <Card.ImgOverlay>
 
-    <Card.Title>{use.name}</Card.Title>
+    <Card.Title>{card.name}</Card.Title>
     <Card.Body>
     <Card.Text>
-      {use.meaning_up}
+      {card.meaning_up}
     </Card.Text>
-    <Card.Text>
-      {use.desc}
-    </Card.Text>
+
     </Card.Body>
+
     </Card.ImgOverlay>
         </Card>
+        </OverlayTrigger>
         )
 
     }
 
-
-
-
-
-
 render(){
     return(
 
-        <futureRender card={this.props.draw} />
+        this.futureRender(this.props.use)
         
     )
 }
 
 }
 
-export default Card;   
+export default Cardd;   
 
 
 
