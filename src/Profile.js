@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
-import { Container, Card, Image, Accordion, Button, Form } from 'react-bootstrap';
+import { Container, Card, Image, Accordion, Button, Form, Col, Row } from 'react-bootstrap';
 
 class Profile extends Component {
 
 
   render() {
     console.log('getting userobj from App?', this.props.userObj.data.cards);
+    console.log('id', this.props.userObj.data.cards._id);
+    console.log('cardset', this.props.userObj.data.cards.cardSet);
     const cardData = this.props.userObj.data.cards;
     const { user } = this.props.auth0;
     return (
@@ -23,10 +25,16 @@ class Profile extends Component {
             <Accordion key={index}>
               <Card>
                 <Card.Header>
-                  <Card.Title>{entry.date}</Card.Title>
-                  <Accordion.Toggle as={Button} variant="dark" eventKey="0">
-                    View
-              </Accordion.Toggle>
+                  <Row>
+                    <Col>
+                      <Card.Title>{entry.date}  {entry._id}</Card.Title>
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                      <Accordion.Toggle as={Button} variant="dark" eventKey="0">
+                        &#9660;
+                      </Accordion.Toggle>
+                    </Col>
+                  </Row>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
@@ -36,7 +44,7 @@ class Profile extends Component {
                         <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" onChange={(e) => this.props.handleJournal(e.target.value)} />
                       </Form.Group>
 
-                      <Button variant="danger" onClick={() => this.props.handleDeleteReading(index)}>delete</Button>
+                      <Button className="mr-2" variant="danger" onClick={() => this.props.handleDeleteReading(index)}>delete</Button>
                       <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e)}>update</Button>
                     </Form>
                   </Card.Body>
