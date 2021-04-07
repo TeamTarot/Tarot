@@ -2,6 +2,9 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { Card, CardDeck, Container, Form, Button } from 'react-bootstrap';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 
 
@@ -45,6 +48,8 @@ class CardTable extends React.Component {
   render() {
     console.log("CardTable User?: ", this.state.user);
     const img = "https://placekitten.com/200/300";
+    let value = 0;
+    let setValue = 5;
     return (
       <>
         {/* {this.state.draw.length > 0 ?
@@ -110,8 +115,17 @@ class CardTable extends React.Component {
             </Card>
           </CardDeck>
         </Container>
-        <Container className="mt-4 mb-4">
+        <Container className="mt-5 mb-4">
           <Form>
+            <Box component="fieldset" mb={3} borderColor="transparent">
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
+            </Box>
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Control as="textarea" rows={6} placeholder="What do you think about this spread?" />
             </Form.Group>
