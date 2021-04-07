@@ -4,6 +4,7 @@ import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
 import Footer from './Footer';
+import AboutUs from './AboutUs';
 import CardTable from './CardTable';
 import {
   BrowserRouter as Router,
@@ -50,11 +51,9 @@ class App extends React.Component {
                 <Profile /> : <Redirect to='/' />
               }
             </Route>
-            {/* <Route exact path="/about">
-         
-                <AboutUs /> 
-        
-            </Route> */}
+            <Route exact path="/about">
+              <AboutUs />
+            </Route>
 
           </Switch>
           <Footer />
