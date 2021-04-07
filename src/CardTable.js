@@ -50,8 +50,8 @@ class CardTable extends React.Component {
   render() {
     return (
       <>
-        <Container>
-          <Button onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
+        <Container className="mt-4 mb-4 text-center">
+          <Button className="mt-4 mb-4 text-center" onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
           <CardDeck>
             {this.state.showCardDraw &&
               this.state.draw.data.map((card, index) => (
