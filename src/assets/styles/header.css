@@ -1,0 +1,27 @@
+nav a {
+  color:#fff;
+  display: inline-block;
+}
+
+nav a:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: #fff;
+  transition: 300ms;
+}
+
+nav a:hover{
+  text-decoration: none;
+  color:darkgrey;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.loggedInPic {
+  width: 20%;
+  margin-left: 1rem;
+}
