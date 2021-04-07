@@ -14,7 +14,7 @@ class Header extends React.Component {
         <Container>
           <Navbar.Brand className="mr-5">My Tarot Cards</Navbar.Brand>
           <Nav className="mr-auto">
-            <Navbar.Text className="mr-5"><Link to="/">Home</Link></Navbar.Text>
+            <Navbar.Text className="mr-5"><Link to="/">Draw Cards</Link></Navbar.Text>
             <Navbar.Text className="mr-5"><Link to="/profile">Profile</Link></Navbar.Text>
             <Navbar.Text className="mr-5"><Link to="/about">About Us</Link></Navbar.Text>
           </Nav>
