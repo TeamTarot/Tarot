@@ -1,9 +1,24 @@
 a{
   color:#fff;
+  display: inline-block;
+}
+
+a:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: #fff;
+  transition: 300ms;
 }
 
 a:hover{
+  text-decoration: none;
   color:darkgrey;
+}
+
+a:hover::after {
+  width: 100%;
 }
 
 .loggedInPic {
