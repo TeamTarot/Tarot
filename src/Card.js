@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { Tooltip } from 'react-bootstrap';
-import './assets/TempHang.jpg';
+// import './assets/TempHang.jpg';
 //Photo by Lucas Pezeta from Pexels
 class Cardd extends React.Component {
 
