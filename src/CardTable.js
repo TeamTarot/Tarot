@@ -13,7 +13,8 @@ class CardTable extends React.Component {
     super(props);
     this.state = {
       user: this.props.userObj,
-      draw: []
+      draw: [],
+      showCardDraw: false
 
 
     };
@@ -22,10 +23,9 @@ class CardTable extends React.Component {
 
 
 
-  componentDidMount() {
-
+  async componentDidMount() {
     try {
-      const user = axios.get("http://localhost:3001/user", { params: { email: this.props.auth0.user.email } });
+      const user = await axios.get("http://localhost:3001/user", { params: { email: this.props.auth0.user.email } });
       this.props.useHandle(user)
 
     } catch (err) {
@@ -33,11 +33,12 @@ class CardTable extends React.Component {
     }
   }
 
-  handleDraw = (e) => {
+  async handleDraw(e) {
     try {
       e.preventDefault();
-      const hand = axios.get("http://localhost:3001/draw", {});
-      this.setState({ draw: hand })
+      const hand = await axios.get("http://localhost:3001/draw", {});
+      console.log('hand', hand);
+      this.setState({ draw: hand, showCardDraw: true })
 
     } catch (err) {
       console.log(err)
@@ -46,102 +47,27 @@ class CardTable extends React.Component {
   }
 
   render() {
-    console.log("CardTable User?: ", this.state.user);
-    const img = "https://placekitten.com/200/300";
-    let value = 0;
-    let setValue = 5;
     return (
       <>
-        {/* {this.state.draw.length > 0 ?
-          <>
-            <div className='card-box'>
-              <div className="card-1">
-                <h1>{this.state.draw[0].name}</h1>
-              </div>
-              <div className="card-2">
-                <h1>{this.state.draw[1].name}</h1>
-              </div>
-              <div className="card-3">
-                <h1>{this.state.draw[2].name}</h1>
-              </div>
-            </div>
-            <textarea placeholder="Journal your thoughts" style={{ height: "150px" }}></textarea>
-            <button>Click to save</button>
-          </>
-          :
-          <button onClick={(e) => { this.handleDraw() }}>Click me for fortune</button>
-        } */}
-        <Container>
-          <h1 className="text-center mt-4 mb-4">Draw Cards</h1>
-          <CardDeck>
-            <Card>
-              <Card.Img variant="top" src={img} />
+        <Button onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
+        {this.state.showCardDraw &&
+          this.state.draw.data.map((card, index) => (
+            <Card key={index}>
+              {/* <Card.Img variant="top" src={img} /> */}
               <Card.Body>
-                <Card.Title>The Fool</Card.Title>
-                <Card.Text>
-                  This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.
-                </Card.Text>
+                <Card.Title>{card.name}</Card.Title>
+                <Card.Text>{card.meaning_up}</Card.Text>
               </Card.Body>
               <Card.Footer>
-                <small className="text-muted">Major Arcana</small>
+                <small className="text-muted">{card.type} Arcana</small>
               </Card.Footer>
             </Card>
-            <Card>
-              <Card.Img variant="top" src={img} />
-              <Card.Body>
-                <Card.Title>The Fool</Card.Title>
-                <Card.Text>
-                  This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Major Arcana</small>
-              </Card.Footer>
-            </Card>
-            <Card>
-              <Card.Img variant="top" src={img} />
-              <Card.Body>
-                <Card.Title>The Fool</Card.Title>
-                <Card.Text>
-                  This is a wider card with supporting text below as a natural lead-in to
-                  additional content. This content is a little bit longer.
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Major Arcana</small>
-              </Card.Footer>
-            </Card>
-          </CardDeck>
-        </Container>
-        <Container className="mt-5 mb-4">
-          <Form>
-            <Box component="fieldset" mb={3} borderColor="transparent">
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </Box>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Control as="textarea" rows={6} placeholder="What do you think about this spread?" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Save My Thoughts
-            </Button>
-            <Button variant="secondary" className="ml-4">
-              Draw Again
-            </Button>
-          </Form>
-        </Container>
 
+          ))
+        }
       </>
-    );
+    )
   }
-
 }
 
 export default withAuth0(CardTable);
