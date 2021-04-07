@@ -33,7 +33,7 @@ class Cardd extends React.Component {
     overlay={this.readMore(card)}
   >
     <Card className="tarot-card">
-      <Card.Img variant="top" src={require('./TempHang.jpg')} />
+      <Card.Img variant="top" src={require('./assets/TempHang.jpg')} />
       <Card.ImgOverlay>
 
     <Card.Title>{card.name}</Card.Title>
