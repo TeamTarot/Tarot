@@ -22,8 +22,8 @@ class App extends React.Component {
       user: {},
       cardArray: [],
       journalEntry: '',
-      selectedJournal: {},
-      indexOfSelectedJournal: -1
+      selectedJournal: {}, 
+      indexOfSelectedJournal: -1 //TODO: find a place to update this state
     };
 
   }
@@ -56,22 +56,23 @@ class App extends React.Component {
     this.setState({ journalEntry });
   };
 
-  replaceJournalEntry = async (e) => {
+  replaceJournalEntry = async (e, index) => {
     e.preventDefault();
+ 
     const SERVER = 'http://localhost:3001';
-    const selectedJournal = this.state.user.data.cards[this.state.indexOfSelectedJournal];
+    console.log('card array index', index);
+    const selectedJournal = this.state.cardArray[index];
     const entry = {
       cardSet: selectedJournal.cardSet,
       date: selectedJournal.date,
       journal: this.state.journalEntry
     };
 
-    this.state.user.data.cards.splice(this.state.indexOfSelectedJournal, 1, entry);
-
-    const updatedUserObj = await axios.put(`${SERVER}/reading/${this.state.indexOfChosenBook}`, { email: this.props.auth0.user.email, entry: entry });
-
-    console.log('after update new obj:', updatedUserObj.data.cards);
-    this.setState({ user: updatedUserObj.data.cards });
+    this.state.user.data.cards.splice(index, 1, entry);
+    // console.log('replace', this.state.data.cards);
+    const updatedCardArray = await axios.put(`${SERVER}/reading/${index}`, { email: this.props.auth0.user.email, entry: entry });
+    console.log('updated cardarray', updatedCardArray);
+    this.setState({ cardArray: updatedCardArray.data });
   }
 
 

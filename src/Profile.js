@@ -25,7 +25,7 @@ class Profile extends Component {
                 <Card.Header>
                   <Row>
                     <Col>
-                      <Card.Title>{entry.date}  {entry._id} {entry.cardSet}</Card.Title>
+                      <Card.Title>{entry.date}</Card.Title>
                     </Col>
                     <Col className="d-flex justify-content-end">
                       <Accordion.Toggle as={Button} variant="dark" eventKey="0">
@@ -43,7 +43,7 @@ class Profile extends Component {
                       </Form.Group>
 
                       <Button className="mr-2" variant="danger" onClick={() => this.props.handleDeleteReading(entry._id)}>delete</Button>
-                      <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e)}>update</Button>
+                      <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e, index)}>update</Button>
                     </Form>
                   </Card.Body>
                 </Accordion.Collapse>
