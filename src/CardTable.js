@@ -1,6 +1,11 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { Card, CardDeck, Container, Form, Button } from 'react-bootstrap';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
 
 
 class CardTable extends React.Component {
@@ -8,70 +13,64 @@ class CardTable extends React.Component {
     super(props);
     this.state = {
       user: this.props.userObj,
-      draw:[]
-     
-      
+      draw: [],
+      showCardDraw: false
+
+
     };
     // const user = this.props.auth0;
   }
 
 
 
-  componentDidMount(){
-   
-    try{
-      const user = axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}});
+  async componentDidMount() {
+    try {
+      const user = await axios.get("http://localhost:3001/user", { params: { email: this.props.auth0.user.email } });
       this.props.useHandle(user)
-      
-    }catch(err){
-        console.log(err)
+
+    } catch (err) {
+      console.log(err)
     }
   }
 
-  handleDraw = (e) => {
-    try{
+  async handleDraw(e) {
+    try {
       e.preventDefault();
-      const hand = axios.get("http://localhost:3001/draw", {});
-      this.setState({draw: hand})
-      
-    }catch(err){
-        console.log(err)
+      const hand = await axios.get("http://localhost:3001/draw", {});
+      console.log('hand', hand);
+      this.setState({ draw: hand, showCardDraw: true })
+
+    } catch (err) {
+      console.log(err)
     }
 
   }
 
   render() {
-    console.log("CardTable User?: ", this.state.user)
-    return(
+    return (
       <>
-{       this.state.draw.length > 0
-      ?<>
-      <div className='card-box'>
-
-          <div className="card-1">
-            <h1>{this.state.draw[0].name}</h1>
-          </div>
-
-          <div className="card-2">
-            <h1>{this.state.draw[1].name}</h1>
-          </div>
-
-          <div className="card-3">
-            <h1>{this.state.draw[2].name}</h1>
-          </div>
-
-      </div>
-      <textarea placeholder="Journal your thoughts" style={{height:"150px"}}></textarea>
-
-      <button>Click to save</button>
-      
+        <Container>
+          <Button onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
+          <CardDeck>
+            {this.state.showCardDraw &&
+              this.state.draw.data.map((card, index) => (
+                <Card key={index}>
+                  {/* <Card.Img variant="top" src={img} /> */}
+                  <Card.Body>
+                    <Card.Title>{card.name}</Card.Title>
+                    <Card.Text>{card.meaning_up}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">{card.type} Arcana</small>
+                  </Card.Footer>
+                </Card>
+              ))
+            }
+          </CardDeck>
+        </Container>
       </>
-      :<button onClick={(e)=>{this.handleDraw()}}>Click me for fortune</button>
-}
-      </>
-    );
+    )
   }
-
 }
 
 export default withAuth0(CardTable);
