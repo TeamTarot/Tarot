@@ -12,7 +12,7 @@ class AboutUs extends React.Component {
     const img = 'https://placekitten.com/200/200';
 
     const masonGit = 'https://github.com/masonaviles';
-    const masonBlurp = '';
+    const masonBlurp = 'Hi Im Mason. I believe in and champion technology access and human connection in my  work. I love pressing buttons and pulling levers.'
 
     const audreyGit = 'https://github.com/arpatterson31';
     const audreyBlurp = 'Hi my name is Audrey Patterson. I love that technology is constantly changing and am excited to continue on this journey into software development for the challenge that comes with that change.';
