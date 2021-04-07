@@ -1,9 +1,9 @@
-a{
+nav a {
   color:#fff;
   display: inline-block;
 }
 
-a:after {
+nav a:after {
   content: '';
   width: 0px;
   height: 2px;
@@ -12,12 +12,12 @@ a:after {
   transition: 300ms;
 }
 
-a:hover{
+nav a:hover{
   text-decoration: none;
   color:darkgrey;
 }
 
-a:hover::after {
+nav a:hover::after {
   width: 100%;
 }
 
