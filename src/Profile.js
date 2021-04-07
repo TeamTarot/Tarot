@@ -6,7 +6,7 @@ class Profile extends Component {
 
 
   render() {
-    console.log('getting userobj from App?', this.props.userObj.data.cards[0]);
+    console.log('getting userobj from App?', this.props.userObj.data.cards);
     const cardData = this.props.userObj.data.cards;
     const { user } = this.props.auth0;
     return (
@@ -33,11 +33,11 @@ class Profile extends Component {
                     <Form>
 
                       <Form.Group>
-                        <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" />
+                        <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" onChange={(e) => this.props.handleJournal(e.target.value)} />
                       </Form.Group>
 
-                      <Button variant="danger" onClick={() => this.handleDeleteReading(index)}>delete</Button>
-                      <Button variant="info" onClick={() => this.displayUpdateModal(index)}>update</Button>
+                      <Button variant="danger" onClick={() => this.props.handleDeleteReading(index)}>delete</Button>
+                      <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e)}>update</Button>
                     </Form>
                   </Card.Body>
                 </Accordion.Collapse>

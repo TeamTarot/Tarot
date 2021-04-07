@@ -19,7 +19,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      journalEntry: '',
+      selectedJournal: {},
+      indexOfSelectedJournal: -1
     };
 
   }
@@ -30,18 +33,43 @@ class App extends React.Component {
       user: upd
     })
   }
-
+  
   handleDeleteReading = async (id) => {
+    console.log('delete function', this.state.user.data);
     const SERVER = 'http://localhost:3001';
-    const deletedJournal = await axios.delete(`${SERVER}/reading/${id}`, { params: { id: this.user.data.id } });
+    const deletedJournal = await axios.delete(`${SERVER}/reading/${id}`, { params: { id: this.state.user.data.id } });
     console.log('after delete success', deletedJournal);
 
     const newUserObj = this.state.user.filter((journal, iD) => {
       return id !== iD;
     });
-    this.setState({ user: newUserObj });
-    // console.log('newUserObj in delete', newUserObj);
+    // this.setState({ user: newUserObj });
+    console.log('newUserObj in delete', newUserObj);
   }
+
+  handleJournal = (journalEntry) => {
+    console.log('update journal', this.state.indexOfSelectedJournal);
+    this.setState({ journalEntry });
+  };
+
+  replaceJournalEntry = async (e) => {
+    e.preventDefault();
+    const SERVER = 'http://localhost:3001';
+    const selectedJournal = this.state.user.data.cards[this.state.indexOfSelectedJournal];
+    const entry = {
+      cardSet: selectedJournal.cardSet,
+      date: selectedJournal.date,
+      journal: this.state.journalEntry
+    };
+
+    this.state.user.data.cards.splice(this.state.indexOfSelectedJournal, 1, entry);
+
+    const updatedUserObj = await axios.put(`${SERVER}/reading/${this.state.indexOfChosenBook}`, { email: this.props.auth0.user.email, entry: entry });
+
+    console.log('after update new obj:', updatedUserObj.data.cards);
+    this.setState({ user: updatedUserObj.data.cards });
+  }
+
 
   render() {
     console.log('app', this.props);
@@ -61,7 +89,7 @@ class App extends React.Component {
             </Route>
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
-                <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading}/> : <Redirect to='/' />
+                <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading} handleJournal={this.handleJournal} replaceJournalEntry={this.replaceJournalEntry} /> : <Redirect to='/' />
               }
             </Route>
             {/* <Route exact path="/about">
