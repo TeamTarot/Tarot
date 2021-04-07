@@ -2,7 +2,7 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Cardd from './Card';
-import CardDeck from 'react-bootstrap/CardDeck'
+import { Card, CardDeck, Container, Form, Button } from 'react-bootstrap';
 
 class CardTable extends React.Component {
   constructor(props) {
@@ -35,7 +35,6 @@ class CardTable extends React.Component {
    await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
    console.log("in save" , this.state) 
  }
-
 
 
   handleDraw = async (e) => {
@@ -81,26 +80,3 @@ class CardTable extends React.Component {
 }
 
 export default withAuth0(CardTable);
-
-
-
-// <OverlayTrigger
-//     placement="right"
-//     delay={{ show: 250, hide: 400 }}
-//     overlay={this.readMore(card)}
-//   >
-//     <Card className="tarot-card">
-//       {/* <Card.Img variant="top" src={require('./assets/TempHang.jpg')} /> */}
-//       <Card.ImgOverlay>
-
-//     <Card.Title>{draw[0].name}</Card.Title>
-//     <Card.Body>
-//     <Card.Text>
-//       {card[0].meaning_up}
-//     </Card.Text>
-
-//     </Card.Body>
-
-//     </Card.ImgOverlay>
-//         </Card>
-//         </OverlayTrigger>
