@@ -42,7 +42,7 @@ class Profile extends Component {
                         <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" onChange={(e) => this.props.handleJournal(e.target.value)} />
                       </Form.Group>
 
-                      <Button className="mr-2" variant="danger" onClick={() => this.props.handleDeleteReading(entry._id)}>delete</Button>
+                      <Button className="mr-2" variant="danger" onClick={() => this.props.handleDeleteReading(index)}>delete</Button>
                       <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e, index)}>update</Button>
                     </Form>
                   </Card.Body>
