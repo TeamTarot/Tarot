@@ -49,22 +49,25 @@ class CardTable extends React.Component {
   render() {
     return (
       <>
-        <Button onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
-        {this.state.showCardDraw &&
-          this.state.draw.data.map((card, index) => (
-            <Card key={index}>
-              {/* <Card.Img variant="top" src={img} /> */}
-              <Card.Body>
-                <Card.Title>{card.name}</Card.Title>
-                <Card.Text>{card.meaning_up}</Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">{card.type} Arcana</small>
-              </Card.Footer>
-            </Card>
-
-          ))
-        }
+        <Container>
+          <Button onClick={(e) => { this.handleDraw(e) }}>Click me for fortune</Button>
+          <CardDeck>
+            {this.state.showCardDraw &&
+              this.state.draw.data.map((card, index) => (
+                <Card key={index}>
+                  {/* <Card.Img variant="top" src={img} /> */}
+                  <Card.Body>
+                    <Card.Title>{card.name}</Card.Title>
+                    <Card.Text>{card.meaning_up}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">{card.type} Arcana</small>
+                  </Card.Footer>
+                </Card>
+              ))
+            }
+          </CardDeck>
+        </Container>
       </>
     )
   }
