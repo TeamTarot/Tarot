@@ -5,7 +5,7 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import LoggedInPic from './LoggedInPic';
 import { withAuth0 } from '@auth0/auth0-react';
-import './header.css';
+import './assets/styles/header.css';
 
 class Header extends React.Component {
   render() {

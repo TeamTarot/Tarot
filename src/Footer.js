@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import './footer.css';
+import './assets/styles/footer.css';
 
 class Footer extends React.Component {
   render() {

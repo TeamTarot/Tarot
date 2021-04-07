@@ -1,7 +1,7 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, CardDeck, Card, Image, Button } from 'react-bootstrap';
-import './about.css';
+import './assets/styles/about.css';
 import mason from './assets/imgs/mason.png'; 
 
 
