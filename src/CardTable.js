@@ -22,7 +22,8 @@ class CardTable extends React.Component {
   async componentDidMount(){
    
     try{
-      await axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}})
+      const user = await axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}});
+      this.props.useHandle(user)
      
     } catch(err) {
       console.log(err)
