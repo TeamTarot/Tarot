@@ -36,15 +36,26 @@ class App extends React.Component {
     })
   }
   
-  handleDeleteReading = async (id) => {
+  handleDeleteReading = async (index) => {
     console.log('delete function', this.state.user.data);
-    console.log('id?', id);
+    console.log('index?', index);
     const SERVER = 'http://localhost:3001';
-    const deletedJournal = await axios.delete(`${SERVER}/reading/${id}`, {params: {email: this.props.auth0.user.email}} );
+    const selectedJournal = this.state.cardArray[index];
+    const entry = {
+      cardSet: selectedJournal.cardSet,
+      date: selectedJournal.date,
+      journal: this.state.journalEntry
+    };
+
+    this.state.user.data.cards.splice(index, 1, entry);
+
+    const deletedJournal = await axios.delete(`${SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email, entry: entry}} );
+
     console.log('after delete success', deletedJournal);
+
 // on delete, we need to update user.data.cards
-    const newCardArray = this.state.user.data.cards.filter((data) => {
-      return id !== data._id;
+    const newCardArray = this.state.user.data.cards.filter((data, i) => {
+      return index !== i;
     });
     console.log('new card array', newCardArray)
     this.setState( {cardArray: newCardArray} );
