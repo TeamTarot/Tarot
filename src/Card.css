@@ -1,0 +1,12 @@
+
+
+
+.tarot-card{
+    height: 300px;
+    max-width:25%;
+    justify-self:center;
+    border-radius: 3px;
+    border-color: darkred;
+}
+
+
