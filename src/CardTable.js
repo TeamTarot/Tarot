@@ -42,13 +42,13 @@ class CardTable extends React.Component {
   handleDraw = async (e) => {
     try{
       e.preventDefault();
-      const hand = await axios.get(`${process.env.REACT_APP_SERVER}/draw`, {})
+      const hand = await axios.get(`${process.env.REACT_APP_SERVER}/draw`);
       this.setState({draw: hand.data,
                      showDeck: true,
-                     today:{date: this.state.today.date, cardSet:hand.data, journal: this.state.today.journal} })
+                     today:{date: this.state.today.date, cardSet:hand.data, journal: this.state.today.journal} });
       
     }catch(err){
-        console.log(err)
+        console.log(err);
     }
 
   }
