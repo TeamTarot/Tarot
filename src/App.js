@@ -29,6 +29,7 @@ class App extends React.Component {
 
   }
 
+<<<<<<< Updated upstream
 
   handleUser = (upd) => {
     this.setState({
@@ -81,8 +82,19 @@ class App extends React.Component {
   }
 
 
+=======
+  handleNew = (read ) => {
+    this.setState({user:{name: this.state.user.name,
+                          cards: [...this.state.user.cards, read]}})
+  }
+  handleUser = (upd, nw) => {
+  this.setState({
+    user:upd
+  })
+}
+>>>>>>> Stashed changes
   render() {
-    console.log('app', this.props);
+    console.log('app');
     console.log(this.props.auth0);
     return (
       <>
@@ -94,7 +106,7 @@ class App extends React.Component {
 
             <Route exact path="/">
               {this.props.auth0.isAuthenticated ?
-                <CardTable useHandle={this.handleUser} userObj={this.state.user} /> : <Login />
+                <CardTable useHandle={this.handleUser} update={this.handleNew} userObj={this.state.user} /> : <Login />
               }
             </Route>
             <Route exact path="/profile">
