@@ -20,7 +20,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: {email:'',
+              cards:[{date: '',
+                      cardSet: [],
+                      journal: ''}]},
       cardArray: [],
       journalEntry: '',
       selectedJournal: {}, 
@@ -30,11 +33,11 @@ class App extends React.Component {
   }
 
 
-
+//.data is placed here
   handleUser = (upd) => {
     this.setState({
       user: upd,
-      cardArray: upd.data.cards
+    
     })
   }
   
@@ -83,12 +86,13 @@ class App extends React.Component {
 
 
 
-  handleNew = (read ) => {
-    this.setState({user:{name: this.state.user.name,
-                          cards: this.state.user.cards.concat(read) }})
+  handleNew = (read) => {
+    const newbie = this.state.user.cards
+    newbie = [...newbie, read]
+    this.setState({ newbie })
   }
 
-  handleUser = (upd, nw) => {
+  handleUser = (upd) => {
   this.setState({
     user:upd
   })
