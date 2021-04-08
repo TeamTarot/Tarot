@@ -10,8 +10,7 @@ import CardTable from './CardTable';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from 'react-router-dom';
 
 
@@ -100,7 +99,7 @@ class App extends React.Component {
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
                 <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading} handleJournal={this.handleJournal} replaceJournalEntry={this.replaceJournalEntry} 
-                cardArray={this.state.cardArray} /> : <Redirect to='/' />
+                cardArray={this.state.cardArray} /> : <Login />
               }
             </Route>
             <Route exact path="/about">
