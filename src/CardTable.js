@@ -58,22 +58,29 @@ class CardTable extends React.Component {
     return(
       <>
 {       this.state.draw.length
-      ?<>
-       
-       <CardDeck >
-          {this.state.draw.map((card) =>{
-      return <Cardd use={card} id={card._id}/>})}
-       </CardDeck>
-
-       {/* <div>{this.state.draw}</div> */}
-       {this.state.draw.length && <div>this.state.draw</div>}
-       <div className="reflections">
-       <textarea placeholder="Journal your thoughts and reflections" style={{height:"150px"}} onChange={(e)=> this.setState({
-                                                                    today:{date: this.state.today.date, cardSet: this.state.today.cardSet,  journal: e.target.value}})}/>
-       <button onClick={(e)=> {this.saveReading(e)}}>Click to save</button>
-       </div>
+        ?<>
+        <Container className="mt-4 mb-4">
+          <CardDeck >
+            {this.state.draw.map((card) =>{
+        return <Cardd use={card} id={card._id}/>})}
+          </CardDeck>
+        </Container>
+        {/* <div>{this.state.draw}</div> */}
+        {this.state.draw.length && <div></div>}
+        <Container className="reflections mb-4">
+          <Form>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Control as="textarea" rows={6} onChange={(e)=> this.setState({today:{date: this.state.today.date, cardSet: this.state.today.cardSet,  journal: e.target.value}})} placeholder="Journal your thoughts and reflections" />
+            </Form.Group>
+            {/* <textarea placeholder="Journal your thoughts and reflections" style={{height:"150px"}} onChange={(e)=> this.setState({today:{date: this.state.today.date, cardSet: this.state.today.cardSet,  journal: e.target.value}})}/> */}
+          </Form>
+        <Button onClick={(e)=> {this.saveReading(e)}}>Click to save</Button>
+       </Container>
        </>
-      :<div className="draw-button"><button onClick={(e)=>{this.handleDraw(e)}}>Click me for fortune</button></div>
+      :
+      <Container className="draw-button text-center mt-5 mb-5">
+        <Button onClick={(e)=>{this.handleDraw(e)}}>Draw Tarot Cards 🔮</Button>
+      </Container>
     }
       </>
     );
