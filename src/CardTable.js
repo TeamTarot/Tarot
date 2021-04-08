@@ -46,7 +46,7 @@ class CardTable extends React.Component {
       this.setState({draw: hand.data,
                      showDeck: true,
                      today:{date: this.state.today.date, cardSet:hand.data, journal: this.state.today.journal} })
-      console.log("handle draw hand:", hand)
+      
     }catch(err){
         console.log(err)
     }
