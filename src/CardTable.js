@@ -61,7 +61,7 @@ class CardTable extends React.Component {
         ?<>
         <Container className="mt-4 mb-4">
           <CardDeck >
-            {this.state.draw.map((card) =>{
+            {this.state.draw.map((card, index) =>{
         return <Cardd use={card} id={card._id}/>})}
           </CardDeck>
         </Container>

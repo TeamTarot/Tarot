@@ -32,7 +32,7 @@ class Cardd extends React.Component {
         overlay={this.readMore(card)}
       >
       <Card className="tarot-card">
-        {/* <Card.Img variant="top" src={require('./assets/TempHang.jpg')} /> */}
+        <Card.Img variant="top" src={`../deck/${card.name_short}.jpg`} />
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>
@@ -41,13 +41,12 @@ class Cardd extends React.Component {
           </Card.Body>
         </Card>
       </OverlayTrigger>
-        )
+    )
+  }
 
-    }
-
-render(){
-    return this.futureRender(this.props.use)
-}
+  render(){
+    return this.futureRender(this.props.use);
+  }
 
 }
 
