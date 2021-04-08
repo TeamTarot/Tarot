@@ -22,7 +22,7 @@ class CardTable extends React.Component {
   async componentDidUpdate(){
    
     try{
-      const user = await axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}});
+      const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, {params:{email: this.props.auth0.user.email}});
       this.props.useHandle(user);
     } catch(err) {
       console.log(err);
@@ -33,7 +33,7 @@ class CardTable extends React.Component {
  saveReading = async (e) =>{
    e.preventDefault();
    console.log(this.props.auth0.user.email)
-   await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
+   await axios.post(`${process.env.REACT_APP_SERVER}/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
    console.log("in save" , this.state) 
  }
 
@@ -42,7 +42,7 @@ class CardTable extends React.Component {
   handleDraw = async (e) => {
     try{
       e.preventDefault();
-      const hand = await axios.get("http://localhost:3001/draw", {})
+      const hand = await axios.get(`${process.env.REACT_APP_SERVER}/draw`, {})
       this.setState({draw: hand.data,
                      showDeck: true,
                      today:{date: this.state.today.date, cardSet:hand.data, journal: this.state.today.journal} })

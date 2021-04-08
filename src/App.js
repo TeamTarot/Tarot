@@ -40,10 +40,8 @@ class App extends React.Component {
   handleDeleteReading = async (index) => {
     console.log('delete function', this.state.user.data);
     console.log('index?', index);
-    const SERVER = 'http://localhost:3001';
- 
 
-    const deletedJournal = await axios.delete(`${SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email} });
+    const deletedJournal = await axios.delete(`${process.env.REACT_APP_SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email} });
 
     console.log('after delete success', deletedJournal);
 
@@ -64,7 +62,6 @@ class App extends React.Component {
   replaceJournalEntry = async (e, index) => {
     e.preventDefault();
  
-    const SERVER = 'http://localhost:3001';
     console.log('card array index', index);
     const selectedJournal = this.state.cardArray[index];
     const entry = {
@@ -75,7 +72,7 @@ class App extends React.Component {
 
     this.state.user.data.cards.splice(index, 1, entry);
     // console.log('replace', this.state.data.cards);
-    const updatedCardArray = await axios.put(`${SERVER}/reading/${index}`, { email: this.props.auth0.user.email, entry: entry });
+    const updatedCardArray = await axios.put(`${process.env.REACT_APP_SERVER}/reading/${index}`, { email: this.props.auth0.user.email, entry: entry });
     console.log('updated cardarray', updatedCardArray);
     this.setState({ cardArray: updatedCardArray.data });
   }
