@@ -29,7 +29,7 @@ class App extends React.Component {
 
   }
 
-<<<<<<< Updated upstream
+
 
   handleUser = (upd) => {
     this.setState({
@@ -82,17 +82,18 @@ class App extends React.Component {
   }
 
 
-=======
+
   handleNew = (read ) => {
     this.setState({user:{name: this.state.user.name,
-                          cards: [...this.state.user.cards, read]}})
+                          cards: this.state.user.cards.concat(read) }})
   }
+
   handleUser = (upd, nw) => {
   this.setState({
     user:upd
   })
 }
->>>>>>> Stashed changes
+
   render() {
     console.log('app');
     console.log(this.props.auth0);

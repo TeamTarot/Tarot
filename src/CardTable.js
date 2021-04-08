@@ -2,7 +2,7 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Cardd from './Card';
-import { Card, CardDeck, Container, Form, Button } from 'react-bootstrap';
+import {  CardDeck } from 'react-bootstrap';
 
 class CardTable extends React.Component {
   constructor(props) {
