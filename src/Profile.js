@@ -17,7 +17,7 @@ class Profile extends Component {
           </Card.Body>
         </Container>
 
-        <Container>
+        <Container className="mb-4">
           {cardData.length && cardData.map((entry, index) => (
             <Accordion key={index}>
               <Card>
