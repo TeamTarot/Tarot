@@ -19,13 +19,13 @@ class CardTable extends React.Component {
     }
   }
   }
-  async componentDidMount(){
+  async componentDidUpdate(){
    
     try{
-      const user = await axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}})
-      this.props.useHandle(user)
+      const user = await axios.get("http://localhost:3001/user", {params:{email: this.props.auth0.user.email}});
+      this.props.useHandle(user);
     } catch(err) {
-      console.log(err)
+      console.log(err);
     }
 
   };
@@ -36,7 +36,7 @@ class CardTable extends React.Component {
 
    const up = await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
    console.log("in save" , this.state) 
-   this.props.update(up)
+  //  this.props.update(up)
  }
 
 
