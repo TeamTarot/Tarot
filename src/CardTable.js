@@ -33,10 +33,8 @@ class CardTable extends React.Component {
  saveReading = async (e) =>{
    e.preventDefault();
    console.log(this.props.auth0.user.email)
-
-   const up = await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
+   await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
    console.log("in save" , this.state) 
-  //  this.props.update(up)
  }
 
 
