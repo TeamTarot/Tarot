@@ -36,7 +36,7 @@ class CardTable extends React.Component {
 
    const up = await axios.post(`http://localhost:3001/reading`, {email:this.props.auth0.user.email, reading: this.state.today} )
    console.log("in save" , this.state) 
-   this.props.update(up)
+   this.props.update(this.state.today)
  }
 
 
