@@ -29,6 +29,7 @@ class App extends React.Component {
 
   }
 
+   
 
   handleUser = (upd) => {
     this.setState({
@@ -100,18 +101,12 @@ class App extends React.Component {
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
                 <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading} handleJournal={this.handleJournal} replaceJournalEntry={this.replaceJournalEntry} 
-                cardArray={this.state.cardArray} /> : <Redirect to='/login' />
+                cardArray={this.state.cardArray} /> : <Redirect to='/' />
               }
             </Route>
             <Route exact path="/about">
               <AboutUs />
             </Route>
-
-            <Route exact path="/login">
-                {this.props.auth0.isAuthenticated ?
-                  <Redirect to='/profile' /> : <Login />
-                }
-              </Route>
 
           </Switch>
           <Footer />

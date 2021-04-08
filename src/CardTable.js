@@ -43,10 +43,10 @@ class CardTable extends React.Component {
     try{
       e.preventDefault();
       const hand = await axios.get("http://localhost:3001/draw", {})
+      console.log("drawing", hand.data)
       this.setState({draw: hand.data,
                      showDeck: true,
                      today:{date: this.state.today.date, cardSet:hand.data, journal: this.state.today.journal} })
-      console.log("handle draw hand:", hand)
     }catch(err){
         console.log(err)
     }
