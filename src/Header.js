@@ -10,7 +10,7 @@ import './assets/styles/header.css';
 class Header extends React.Component {
   render() {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="md" className="header">
         <Container>
           <Navbar.Brand className="mr-5">My Tarot Cards</Navbar.Brand>
           <Nav className="mr-auto">

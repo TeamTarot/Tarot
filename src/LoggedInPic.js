@@ -11,7 +11,7 @@ function LoggedInPic() {
 
   return isAuthenticated && (
     <>
-      <Image className="loggedInPic" src={user.picture} roundedCircle />
+      <Image className="loggedInPic " src={user.picture} roundedCircle />
     </>
   );
 }
