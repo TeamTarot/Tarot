@@ -1,7 +1,8 @@
 # Tarot
 
-[See the App](https://compassionate-darwin-1acfe7.netlify.app/)
-[API](https://rws-cards-api.herokuapp.com/)
+- [See the App](https://compassionate-darwin-1acfe7.netlify.app/)
+
+- [API](https://rws-cards-api.herokuapp.com/)
 
 Tarot App & Tarot API
 1. Summary of idea.
