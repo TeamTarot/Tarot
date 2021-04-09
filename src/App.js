@@ -96,6 +96,7 @@ class App extends React.Component {
           <Header
             auth={this.props.auth0.isAuthenticated}
           />
+          <body className="content-wrapper">
           <Switch>
 
             <Route exact path="/">
@@ -120,6 +121,7 @@ class App extends React.Component {
               </Route>
 
           </Switch>
+          </body>
           <Footer />
         </Router>
       </>
