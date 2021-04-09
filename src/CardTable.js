@@ -80,7 +80,7 @@ class CardTable extends React.Component {
        </Container>
        </>
       :
-      <Container className="draw-button text-center mt-5 mb-5">
+      <Container className="draw-button text-center mt-10 mb-10">
         <Button onClick={(e)=>{this.handleDraw(e)}}>Draw Tarot Cards 🔮</Button>
       </Container>
     }
