@@ -29,6 +29,16 @@ class App extends React.Component {
 
   }
 
+  // async componentDidMount(){
+   
+  //   try{
+  //     const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, {params:{email: this.props.auth0.user.email}});
+  //     this.handleUser(user);
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+
+  // };
 
   handleUser = (upd) => {
     this.setState({
@@ -41,12 +51,11 @@ class App extends React.Component {
     console.log('delete function', this.state.user.data);
     console.log('index?', index);
 
-    const deletedJournal = await axios.delete(`${process.env.REACT_APP_SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email} });
+    await axios.delete(`${process.env.REACT_APP_SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email} });
 
-    console.log('after delete success', deletedJournal);
-
+   
 // on delete, we need to update user.data.cards
-    const newCardArray = this.state.user.data.cards.filter((data, i) => {
+    const newCardArray = this.state.cardArray.filter((data, i) => {
       return index !== i;
     });
     console.log('new card array', newCardArray)
@@ -97,7 +106,7 @@ class App extends React.Component {
             <Route exact path="/profile">
               {this.props.auth0.isAuthenticated ?
                 <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading} handleJournal={this.handleJournal} replaceJournalEntry={this.replaceJournalEntry} 
-                cardArray={this.state.cardArray} /> : <Redirect to='/login' />
+                cardArray={this.state.cardArray} handleUser={this.handleUser} /> : <Redirect to='/login' />
               }
             </Route>
             <Route exact path="/about">

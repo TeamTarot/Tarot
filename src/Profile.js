@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, Card, Image, Accordion, Button, Form, Col, Row } from 'react-bootstrap';
+import axios from 'axios'
 
 class Profile extends Component {
 
+  async componentDidMount() {
+
+    try {
+      const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, { params: { email: this.props.auth0.user.email } });
+      this.props.handleUser(user);
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
 
   render() {
     const cardData = this.props.cardArray;
