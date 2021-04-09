@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, Card, Image, Accordion, Button, Form, Col, Row } from 'react-bootstrap';
+import './assets/styles/profile.css';
 
 class Profile extends Component {
 
@@ -22,16 +23,18 @@ class Profile extends Component {
             <Accordion key={index}>
               <Card>
                 <Card.Header>
-                  <Row>
-                    <Col>
-                      <Card.Title>Journal Date: {entry.date}</Card.Title>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                      <Accordion.Toggle as={Button} variant="dark" eventKey="0">
-                        &#9660;
-                      </Accordion.Toggle>
-                    </Col>
-                  </Row>
+                  <Card.Title>
+                    <div>
+                      <span>Journal Date:</span>
+                      <span>{entry.date}</span>
+                    </div>
+                    <span>🎴 [{entry.cardSet[0].name}] [{entry.cardSet[1].name}] [{entry.cardSet[2].name}]</span>
+                  </Card.Title>
+                  <Col className="d-flex justify-content-end">
+                    <Accordion.Toggle as={Button} variant="dark" eventKey="0">
+                      &#9660;
+                    </Accordion.Toggle>
+                  </Col>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>

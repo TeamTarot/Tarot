@@ -1,0 +1,10 @@
+.accordion .card-title.h5 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.accordion .card-header {
+  display: flex;
+  justify-content: space-between;
+}
