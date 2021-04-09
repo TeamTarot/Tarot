@@ -27,5 +27,5 @@ nav a:hover::after {
 }
 
 .draw-button {
-  margin: 15rem auto;
+  margin: 15rem auto !important;
 }
