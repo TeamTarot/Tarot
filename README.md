@@ -1,5 +1,8 @@
 # Tarot
 
+[See the App](https://compassionate-darwin-1acfe7.netlify.app/)
+[API](https://rws-cards-api.herokuapp.com/)
+
 Tarot App & Tarot API
 1. Summary of idea.
     1. a deck app where you are able to draw 3 cards and journal about them. you can CRUD all up in here
