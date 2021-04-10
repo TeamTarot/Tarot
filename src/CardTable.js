@@ -18,6 +18,10 @@ class CardTable extends React.Component {
     }
   }
   }
+
+
+
+
   // async componentDidMount(){
    
   //   try{
@@ -38,7 +42,6 @@ class CardTable extends React.Component {
  }
 
 
-
   handleDraw = async (e) => {
     try{
       e.preventDefault();
@@ -55,13 +58,11 @@ class CardTable extends React.Component {
   }
   
   render() {
-    console.log("CardTable User?: ", this.state.user)
-    console.log("pre-render hand", this.state.draw)
     return(
       <>
 {       this.state.draw.length
         ?<>
-        <Container className="mt-4 mb-4">
+        <Container >
           <CardDeck >
             {this.state.draw.map((card, index) =>{
         return <Cardd use={card} id={card._id}/>})}
@@ -80,7 +81,7 @@ class CardTable extends React.Component {
        </Container>
        </>
       :
-      <Container className="draw-button text-center mt-5 mb-5">
+      <Container className="draw-button text-center test-login">
         <Button onClick={(e)=>{this.handleDraw(e)}}>Draw Tarot Cards 🔮</Button>
       </Container>
     }

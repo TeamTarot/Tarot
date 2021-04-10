@@ -21,9 +21,9 @@ class Profile extends Component {
     const { user } = this.props.auth0;
     return (
       <>
-        <Container className="mt-5 mb-5">
-          <Image style={{ width: '16rem' }} src={user.picture} roundedCircle />
-          <Card.Body>
+        <Container className="mt-5 mb-5 pretty-picture">
+          <Image style={{ width: '14rem' }} src={user.picture} roundedCircle />
+          <Card.Body className="user-sec">
             <Card.Title >🔮 Hello {user.name} 🔮</Card.Title>
           </Card.Body>
         </Container>

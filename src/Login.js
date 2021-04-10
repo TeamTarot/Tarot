@@ -7,9 +7,9 @@ import { Card, Container, CardDeck } from 'react-bootstrap';
 class Login extends React.Component {
   render() {
     return(
-      <Container className="draw-button text-center mt-5 mb-5">
+      <Container className="draw-button text-center login-container test-login">
         <CardDeck>
-          <Card style={{ width: '18rem' }}>
+          <Card className="login-card" style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title>Log In</Card.Title>
               <Card.Text>

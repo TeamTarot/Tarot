@@ -6,11 +6,11 @@ import './assets/styles/footer.css';
 class Footer extends React.Component {
   render() {
     return (
-      <Navbar className="footer" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
+      <Navbar className="footer" collapseOnSelect >
+        <Container className="footer-stuff">
           <Navbar.Brand>&copy; Tarot</Navbar.Brand>
           <Nav className="mr-auto">
-            <Navbar.Text className="mr-5"><a href="https://github.com/TeamTarot" target="_blank" rel="noreferrer" >Github</a></Navbar.Text>
+            <Navbar.Text><a href="https://github.com/TeamTarot" target="_blank" rel="noreferrer" >Github</a></Navbar.Text>
           </Nav>
         </Container>
       </Navbar>
