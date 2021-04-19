@@ -4,18 +4,10 @@ import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { Tooltip } from 'react-bootstrap';
 
-class Cardd extends React.Component {
+function Cardd (props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      draw:[],
-      showDeck: false,
-    };
-  }
-//add a reverse function? Maybe a 3 to 1 odds of upward facing vs reverse card draws
 
-  readMore = (props) => {
+  const readMore = (props) => {
     return (
       <Tooltip id="read-more" {...props}>
         {props.desc}
@@ -24,12 +16,12 @@ class Cardd extends React.Component {
   }
 
 //add another effect to the hover where the tarot image fades a little as the information gets displayed on hover
-  futureRender = (card) =>{
+  const futureRender = (card) =>{
     return (
       <OverlayTrigger
         placement="right"
         delay={{ show: 250, hide: 400 }}
-        overlay={this.readMore(card)}
+        overlay={readMore(card)}
       >
       <Card className="tarot-card">
         <Card.Img variant="top" src={`../deck/${card.name_short}.jpg`} />
@@ -44,9 +36,9 @@ class Cardd extends React.Component {
     )
   }
 
-  render(){
-    return this.futureRender(this.props.use);
-  }
+
+    return futureRender(props.use);
+
 
 }
 

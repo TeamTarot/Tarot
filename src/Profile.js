@@ -1,35 +1,49 @@
-import React, { Component } from 'react';
+import React, { useContext , useEffect } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, Card, Image, Accordion, Button, Form, Col, Row } from 'react-bootstrap';
-import axios from 'axios'
+import axios from 'axios';
+import { UserContext } from './UserContext';
 
-class Profile extends Component {
 
-  async componentDidMount() {
 
-    try {
-      const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, { params: { email: this.props.auth0.user.email } });
-      this.props.handleUser(user);
-    } catch (err) {
-      console.log(err);
-    }
+function Profile (props) {
 
-  };
+const {value, setValue} = useContext(UserContext);
 
-  render() {
-    const cardData = this.props.cardArray;
-    const { user } = this.props.auth0;
+  useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_SERVER}/user`, { params: { email: props.auth0.user.email } })
+    .then( res => {
+      console.log("RES:   ", res)
+      setValue(res)} )
+    .catch(err => console.error(err))
+  }, [])
+  // async componentDidMount() {
+
+  //   try {
+  //     const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, { params: { email: this.props.auth0.user.email } });
+  //     // this.props.handleUser(user);
+  //     setValue(user)
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  // };
+
+
+    // const cardData = value.user;
+    console.log("cardData: ",value);
+    const { user } = props.auth0;
     return (
       <>
         <Container className="mt-5 mb-5">
-          <Image style={{ width: '16rem' }} src={user.picture} roundedCircle />
+          <Image style={{ width: '16rem' }} src={props.auth0.user.picture} roundedCircle />
           <Card.Body>
-            <Card.Title >🔮 Hello {user.name} 🔮</Card.Title>
+            <Card.Title >🔮 Hello {props.auth0.user.name} 🔮</Card.Title>
           </Card.Body>
         </Container>
 
         <Container className="mb-4">
-          {cardData.length && cardData.map((entry, index) => (
+          {value !== undefined && value.map((entry, index) => (
             <Accordion key={index}>
               <Card>
                 <Card.Header>
@@ -54,11 +68,11 @@ class Profile extends Component {
                     <Form>
 
                       <Form.Group>
-                        <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" onChange={(e) => this.props.handleJournal(e.target.value)} />
+                        <Form.Control as="textarea" rows={4} placeholder={entry.journal} name="journal" onChange={(e) => props.handleJournal(e.target.value)} />
                       </Form.Group>
 
-                      <Button className="mr-2" variant="danger" onClick={() => this.props.handleDeleteReading(index)}>delete</Button>
-                      <Button variant="info" onClick={(e) => this.props.replaceJournalEntry(e, index)}>update</Button>
+                      <Button className="mr-2" variant="danger" onClick={() => props.handleDeleteReading(index)}>delete</Button>
+                      <Button variant="info" onClick={(e) => props.replaceJournalEntry(e, index)}>update</Button>
                     </Form>
                   </Card.Body>
                 </Accordion.Collapse>
@@ -69,6 +83,6 @@ class Profile extends Component {
       </>
     );
   }
-}
+
 
 export default withAuth0(Profile);

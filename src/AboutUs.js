@@ -8,8 +8,8 @@ import audrey from './assets/imgs/audrey.jpeg';
 import jacob from './assets/imgs/jacob.png'; 
 
 
-class AboutUs extends React.Component {
-  render() {
+function  AboutUs (props) {
+ 
     const masonGit = 'https://github.com/masonaviles';
     const masonL = 'https://www.linkedin.com/in/masonaviles/';
     const masonBlurp = 'Hi Im Mason. I believe in and champion technology access and human connection in my  work. I love pressing buttons and pulling levers.'
@@ -79,7 +79,7 @@ class AboutUs extends React.Component {
         </Container>
       </>
     );
-  }
+  
 }
 
 export default withAuth0(AboutUs);

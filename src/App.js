@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , useContext } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Header from './Header';
@@ -13,100 +13,64 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import { UserContext } from './UserContext';
 
 
+function App (props) {
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      cardArray: [],
-      journalEntry: '',
-      selectedJournal: {}, 
-      indexOfSelectedJournal: -1 //TODO: find a place to update this state
-    };
-
-  }
-
-  // async componentDidMount(){
-   
-  //   try{
-  //     const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, {params:{email: this.props.auth0.user.email}});
-  //     this.handleUser(user);
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-
-  // };
-
-  handleUser = (upd) => {
-    this.setState({
-      user: upd,
-      cardArray: upd.data.cards
-    })
-  }
+const {value, setValue} = useContext(UserContext)
+const [cardHand, setCardHand] = useState([])
+const [journalEntry, setJournalEntry] = useState({})
   
-  handleDeleteReading = async (index) => {
-    console.log('delete function', this.state.user.data);
-    console.log('index?', index);
-
-    await axios.delete(`${process.env.REACT_APP_SERVER}/reading/${index}`, {params: {email: this.props.auth0.user.email} });
-
-   
+const handleDeleteReading = async (index) => {
+  await axios.delete(`${process.env.REACT_APP_SERVER}/reading/${index}`, {params: {email: props.auth0.user.email} });
 // on delete, we need to update user.data.cards
-    const newCardArray = this.state.cardArray.filter((data, i) => {
+  const newCardArray = cardHand.filter((data, i) => {
       return index !== i;
     });
-    console.log('new card array', newCardArray)
-    this.setState( {cardArray: newCardArray} );
-  
-  }
+    setCardHand(newCardArray)
+}
 
-  handleJournal = (journalEntry) => {
-    console.log('update journal', this.state.indexOfSelectedJournal);
-    this.setState({ journalEntry });
-  };
+const handleJournal = (journalEntry) => {
+    console.log('update journal', journalEntry);
+    setJournalEntry(journalEntry)
+};
 
-  replaceJournalEntry = async (e, index) => {
+const replaceJournalEntry = async (e, index) => {
     e.preventDefault();
- 
-    console.log('card array index', index);
-    const selectedJournal = this.state.cardArray[index];
+    const selectedJournal = cardHand[index];
     const entry = {
       cardSet: selectedJournal.cardSet,
       date: selectedJournal.date,
-      journal: this.state.journalEntry
+      journal: journalEntry
     };
 
-    this.state.user.data.cards.splice(index, 1, entry);
+    value.data.cards.splice(index, 1, entry);
     // console.log('replace', this.state.data.cards);
-    const updatedCardArray = await axios.put(`${process.env.REACT_APP_SERVER}/reading/${index}`, { email: this.props.auth0.user.email, entry: entry });
+    const updatedCardArray = await axios.put(`${process.env.REACT_APP_SERVER}/reading/${index}`, { email: props.auth0.user.email, entry: entry });
     console.log('updated cardarray', updatedCardArray);
-    this.setState({ cardArray: updatedCardArray.data });
+    setCardHand(updatedCardArray)
   }
 
 
-  render() {
-    console.log('app');
-    console.log(this.props.auth0);
+ 
     return (
       <>
         <Router>
           <Header
-            auth={this.props.auth0.isAuthenticated}
+            // auth={this.props.auth0.isAuthenticated}
           />
           <Switch>
-
+<UserContext.Provider value={{value, setValue}}>
             <Route exact path="/">
-              {this.props.auth0.isAuthenticated ?
-                <CardTable useHandle={this.handleUser} update={this.handleNew} userObj={this.state.user} /> : <Login />
+              {props.auth0.isAuthenticated ?
+                <CardTable updateHand={setCardHand} /> : <Login />
               }
             </Route>
             <Route exact path="/profile">
-              {this.props.auth0.isAuthenticated ?
-                <Profile userObj={this.state.user} handleDeleteReading={this.handleDeleteReading} handleJournal={this.handleJournal} replaceJournalEntry={this.replaceJournalEntry} 
-                cardArray={this.state.cardArray} handleUser={this.handleUser} /> : <Redirect to='/login' />
+              {props.auth0.isAuthenticated ?
+                <Profile userObj={value} handleDeleteReading={handleDeleteReading} handleJournal={handleJournal} replaceJournalEntry={replaceJournalEntry} 
+                cardArray={cardHand} handleUser={setValue} /> : <Redirect to='/login' />
               }
             </Route>
             <Route exact path="/about">
@@ -114,17 +78,17 @@ class App extends React.Component {
             </Route>
 
             <Route exact path="/login">
-                {this.props.auth0.isAuthenticated ?
+                {props.auth0.isAuthenticated ?
                   <Redirect to='/profile' /> : <Login />
                 }
               </Route>
-
+</UserContext.Provider>
           </Switch>
           <Footer />
         </Router>
       </>
     );
-  }
+  
 }
 
 export default withAuth0(App);
